@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      go: 1.25
+      golang: 1.25
     commands:
       - echo "Installing dependencies..."
       - cd go-employee-api
@@ -16,7 +16,8 @@ phases:
   post_build:
     commands:
       - echo "Uploading Lambda function to AWS..."
-      - aws lambda update-function-code --function-name Rishikesh-Employee-Lambda --zip-file fileb://function.zip
+      - aws lambda update-function-code --function-name Rishi-Employee-Lambda --zip-file fileb://function.zip
+
 artifacts:
   files:
     - go-employee-api/**
