@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      go: 1.25
+    commands:
+      - echo "Installing dependencies..."
+      - cd go-employee-api
+      - go mod tidy
+  build:
+    commands:
+      - echo "Building Lambda binary..."
+      - GOOS=linux GOARCH=amd64 go build -o bootstrap main.go
+      - zip function.zip bootstrap
+  post_build:
+    commands:
+      - echo "Uploading Lambda function to AWS..."
+      - aws lambda update-function-code --function-name Rishi-Employee-Lambda --zip-file fileb://function.zip
+artifacts:
+  files:
+    - go-employee-api/**
