@@ -12,14 +12,11 @@ phases:
 
   build:
     commands:
-      - echo "Building Lambda bootstrap"
+      - cd go-employee-api
       - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bootstrap
       - zip function.zip bootstrap
 
   post_build:
     commands:
-      - echo "Deploying to Lambda"
-      - aws lambda update-function-code \
-          --function-name Rishikesh-Employee-Lambda \
-          --zip-file fileb://go-employee-api/function.zip \
-          --region us-west-2
+      - cd go-employee-api
+      - aws lambda update-function-code --function-name Rishikesh-Employee-Lambda --zip-file fileb://function.zip --region us-west-2
