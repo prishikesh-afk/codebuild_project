@@ -38,6 +38,7 @@ func connectDB() (*sql.DB, error) {
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(5)
 
+	//tests the connections 
 	if err := db.Ping(); err != nil {
 		return nil, err
 	}
